@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="AES.cpp" />
     <ClCompile Include="DFA_AES.cpp" />
+    <ClCompile Include="gf28.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AES.h" />

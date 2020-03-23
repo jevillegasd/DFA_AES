@@ -219,7 +219,7 @@ void ShiftRows(state_t* state){
     (*state)[1][3] = temp;
 }
 
-static uint8_t xtime(uint8_t x){
+uint8_t xtime(uint8_t x){
     return ((x << 1) ^ (((x >> 7) & 1) * 0x1b));
 }
 
@@ -456,11 +456,16 @@ uint8_t byte_rsbox(uint8_t byte) {
     return rsbox[(byte)];
 }
 
+gf28 ISB(gf28 byte) {
+    return rsbox[(byte)];
+}
+
 void phex(state_t state) {
     cout << "\t";
     for (int i = 0; i < 16; ++i) {
         printf("%.2x", state[i / 4][i % 4]);
-        if (i % 16 == 15 && i != 15)
-            cout << "\n\t\t\t";
+        if (!((i+1) % 4)) cout << " ";
+        if (i % 16 == 15 && i != 15) cout << "\n\t\t\t";
+            
     }
 }

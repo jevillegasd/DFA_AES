@@ -37,6 +37,7 @@ NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
 
     #include <stdint.h>
     #include "AES_ctx.h"
+    #include "gf28.h"
     // #define the macros below to 1/0 to enable/disable the mode of operation.
     //
     // CBC enables AES encryption in CBC-mode of operation.
@@ -93,10 +94,16 @@ NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
 
     //Sbox subsitution of one byte 
     uint8_t byte_sbox(uint8_t byte);
-    void SubBytes(state_t* state);
 
     //Inverse Sbox subsitution of one byte
     uint8_t byte_rsbox(uint8_t byte);
+
+    //Inverse Sbox subsitution of one byte
+    gf28 ISB(gf28 byte);
+
+    void SubBytes(state_t* state);
+
+    
 
     // MixColumns function mixes the columns of the state matrix
     void MixColumns(state_t* state);
@@ -135,6 +142,8 @@ NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
     #endif
 
     void phex(state_t state);
+
     void Cipher_biterror(state_t* state, const uint8_t RoundKey[AES_keyExpSize], uint8_t byte, uint8_t err);
 
+    uint8_t xtime(uint8_t x);
 #endif //_AES_H_
